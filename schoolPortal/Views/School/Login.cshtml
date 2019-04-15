@@ -1,0 +1,44 @@
+﻿@model schoolPortal.Models.Student
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+  
+<br />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+
+<body style="background-color: rgb(128, 128, 128)">
+    <div id="login">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label asp-for="MatricNumber" class="control-label"></label>
+                    <input asp-for="MatricNumber" class="form-control" />
+                    <span asp-validation-for="MatricNumber" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Department" class="control-label"></label>
+                    <input asp-for="Department" class="form-control" />
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="LOGIN" class="btn btn-primary" /> &nbsp;&nbsp;&nbsp;
+                    <input type="reset" value="CLEAR" class="btn" />
+                </div>
+            </form>
+        }
+    </div>
+</body>
+</html>

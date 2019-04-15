@@ -1,0 +1,114 @@
+﻿@model schoolPortal.Models.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+
+    <h2>Courses</h2>
+<form method="post" id="myForm">
+    <input hidden name="studentId" value="@Model.StudentId" />
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>&nbsp; &nbsp;</th>
+                    <th>Course Namnnne &nbsp;&nbsp;</th>
+                    <th>Course code &nbsp; &nbsp;&nbsp;</th>
+                    <th>Course Unit &nbsp;&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Courses)
+                {
+                    <tr>
+                        <td>&nbsp;<input type="checkbox" class="checks" name="courses" value="@item.Id" /> &nbsp; &nbsp;&nbsp;&nbsp;</td>
+                        <td>@item.CourseName &nbsp;</td>
+                        <td>@item.CourseCode &nbsp;</td>
+                        <td>@item.CourseUnit &nbsp;</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button value="Register" id="btn-submit" class="btn btn-primary"> Register</button>
+            <input type="button" id="toggle" value="select" onclick="Toggle()" />
+            @*<button value="View Register" class="btn btn-primary"> Register</button>*@
+            @Html.ActionLink("View Registered", "Result", "School");
+        </div>
+    </div>
+</form>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script>
+     $(function () {
+        $("#btn-submit").on('click', function (e) {
+            e.preventDefault();
+            var form = $('#myForm').serialize();
+            var checkBox = new Array();
+            
+            $("input:checked").each(function () {
+                checkBox.push($(this).val());
+            });
+            console.log(checkBox);
+            var data = {
+                studentId:@Model.StudentId,
+                courseIds: checkBox
+            }
+            $.ajax({
+                type: "POST",
+                url: "/School/Register",
+                dataType: 'html',
+                data: data,
+                success: function (data) {
+                    document.location.href = '/School/Result/?studentid=@Model.StudentId'
+                },
+                error: (err) => {
+                    console.log(err)
+                }
+
+            });
+        });
+    });
+            //function get() {
+            //    var checks = document.getElementsByClassName('checks');
+            //    var str = '';
+            //    for (i = 0; i < checks.length; i++) {
+            //        if (checks[i].checked === true) {
+            //            str += checks[i].value + " ";
+            //        }
+
+            //    }
+            //    alert(str);
+            //    var siri = window.location.search.split('')[1]
+            //    var url = '/School/Register/' + siri + '?courseId=' + str;
+            //    alert(url);
+            //    window.location = url;
+
+            //}
+            function Toggle() {
+                var ch = document.getElementsByName('courses');
+                var p = document.getElementById('toggle');
+                if (p.value == 'select') {
+                    for (var y in ch) {
+                        ch[y].checked = 'FALSE';
+                    }
+                    p.value = 'deselect';
+                }
+                else {
+                    for (var i in ch) {
+                        ch[i].checked = '';
+                    }
+                    p.value = 'select';
+                }
+            }
+
+</script> 

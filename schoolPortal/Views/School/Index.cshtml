@@ -1,0 +1,82 @@
+﻿@model schoolPortal.Models.ViewModels.StudentViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>REGISTRATION FORM</h2>
+<body style="background-color: lightslategray">
+    @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+    {
+        if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success">
+                <strong>Success</strong>@ViewBag.Message
+            </div>
+            <div>
+                @Html.ActionLink("EDIT", "Index", "School") &nbsp; &nbsp;
+                @Html.ActionLink("LOGIN", "Login", "School")
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <form method="post" enctype="multipart/form-data" asp-controller="School">
+                    <br /><h4>Student Registration</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MatricNumber" class="control-label"></label>
+                        <input asp-for="MatricNumber" class="form-control" />
+                        <span asp-validation-for="MatricNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Department</label>
+                        <select asp-for="DepartmentId"  class="form-control">
+
+                            @foreach (var item in ViewBag.Dept.Dept)
+                            {
+                            <option value="@item.Id">@item.DepartmentName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Submit" class="btn btn-primary" /> &nbsp; &nbsp; &nbsp; &nbsp;
+                                <input type="reset" value="Reset" class="btn btn-default" />
+
+                            </div>
+                            @*@Html.ActionLink("LOGIN", "Login", "student")*@
+                        </div>
+                    </div>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="field-validate-error" data-valmsg-for></span>
+        if (ViewBag.Message != null)
+        {
+                    <div class="alert alert-danger">
+                        <strong>There is an error</strong>@ViewBag.Message
+                    </div>
+        }
+    }
+    </body>
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

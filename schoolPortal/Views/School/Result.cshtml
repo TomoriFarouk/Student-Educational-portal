@@ -1,0 +1,39 @@
+﻿@model IEnumerable<schoolPortal.Models.Courses>
+@{
+    ViewData["Title"] = "end";
+}
+
+<h2>end</h2>
+<form>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>&nbsp; &nbsp;</th>
+                    <th>Course Name &nbsp;&nbsp;</th>
+                    <th>Course code &nbsp; &nbsp;&nbsp;</th>
+                    <th>Course Unit &nbsp;&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>&nbsp; &nbsp;</td>
+                        <td>@item.CourseName &nbsp;</td>
+                        <td>@item.CourseCode &nbsp;</td>
+                        <td>@item.CourseUnit &nbsp;</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
+
+@*<script>
+    $(function () {
+        var dude = @Model
+        console.log(dude)
+    });
+    
+</script>*@

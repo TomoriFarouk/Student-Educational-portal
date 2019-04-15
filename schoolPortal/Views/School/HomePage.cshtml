@@ -1,0 +1,67 @@
+﻿@model schoolPortal.Models.ViewModels.StudentViewModel
+@{
+    ViewData["Title"] = "HomePage";
+}
+
+
+<body>
+    <h2>Your Profile</h2>
+
+    <h4>Welcome,</h4>
+    <h4>Full name: @Model.FirstName @Model.LastName</h4><br />
+    <h4>Matric number: @Model.MatricNumber</h4><br />
+    <h4>Course:  &nbsp; &nbsp;@Model.DepartmentName</h4><br />
+    <div>
+        <p style="font-size:medium">
+            Level:
+            <select name="sell" id="sell">
+                <option selected="selected">Level</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+            </select>
+        </p>
+    </div>
+    <br />
+    <div>
+        <p style="font-size:medium">
+            semester:<br />
+            <input name="how" id="alph" type="radio" value="Alpha" />Alpha &nbsp;
+            <input name="how" id="omg" type="radio" value="Omega" />Omega
+        </p>
+        <br />
+    </div>
+
+
+    <button class="btn btn-primary btn-sm" onclick="aq()" id="btn">Ok</button>
+
+    <br />
+
+    <br />
+    <script>
+        function aq() {
+            
+            var a = document.getElementById("sell").value;
+            var b = '@Model.DepartmentId';
+            var c = '@Model.Id';
+            var url = '/School/Register/'+ c + '?level=' + a + '&courseId=' + b;
+            //var url = '/School/Register/' + '?level=' + a ;
+            window.location = url;
+        }
+
+        //$(function () {
+        //    $('#btn').on('click', () => {
+        //        alert("succ");
+                //let selectList = $('#sell').val();
+                //let url = '/School/Register/' + selectList;
+                //window.location = url;
+        //    });
+        //});
+    </script>
+
+</body>
+
+
+
